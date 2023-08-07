@@ -15,11 +15,23 @@ public class Player_Movement : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 5, 0);
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 20, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(5, 0, 0);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(5, 0, 0);
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 5);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -5);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(-5, 0, 0);
         }
     }
 }
