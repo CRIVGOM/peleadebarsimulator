@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Variables de movimienrto
 
     public float horizontalMove;
     public float verticalMove;
     private Vector3 playerInput;
 
+    //Variable de controlador
     public CharacterController player;
 
+    //Variables de movimiento del personaje
     public float playerSpeed;
     private Vector3 movePlayer;
 
+    //Variables de Gravedad y salto
     public float gravity = 9.8f;
     public float fallVelocity;
+    public float jumpForce;
 
+    //Variables de Control de camara
     public Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
@@ -27,6 +33,8 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    // Actualizacion del personaje por Frame
     void Update() {
 
         horizontalMove = Input.GetAxis("Horizontal");
@@ -45,11 +53,16 @@ public class PlayerController : MonoBehaviour
 
         SetGravity();
 
+        PlayerSkills();
+
         player.Move(movePlayer * Time.deltaTime);
         //player.Move(new Vector3(horizontalMove,0,verticalMove) * playerSpeed * Time.deltaTime);
         //Debug.Log(player.velocity.magnitude);
         
     }
+
+
+    //Funcion de giro de camara del personaje
 
     void camDirection() 
     {
@@ -62,6 +75,21 @@ public class PlayerController : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
     }
+
+
+    //Funcion para las habilidadesde del personaje
+
+    public void PlayerSkills()
+
+    {
+        if (player.isGrounded && Input.GetButtonDown("Jump"))
+        {
+            fallVelocity = jumpForce;
+            movePlayer.y = fallVelocity;
+        }
+    }
+
+    //Funcion de gravedad
 
     void SetGravity() {
 
